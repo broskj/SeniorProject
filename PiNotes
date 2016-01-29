@@ -1,0 +1,38 @@
+RPi 2:
+	IP: 192.168.1.214
+		inet addr: 192.168.1.214
+		Bcast: 192.168.1.255
+		Mask: 255.255.255.0
+		Gateway: 192.168.1.254
+		Destination: 192.168.1.0
+	
+
+RPi Zero #1 (lights):
+	IP: 192.168.1.105
+	on the pi: vncserver :0 -geometry 1920x1080 -depth 24
+	on this computer: xtightvncviewer 192.168.1.105:0
+	Pseudocode: (needs major revising - use GPIO.add_event_detect(channel, GPIO.RISING/FALLING) and GPIO.event_detected(channel))
+		
+		import RPi.GPIO as GPIO
+		GPIO.setmode(GPIO.BCM)
+		
+		relayStatePrev = [False,False,False,False]
+		relayStateCurr = [False,False,False,False]
+		relay = [6, 13, 19, 26]
+		motion = False
+		
+		# set GPIO pins
+		for i in relay:
+			GPIO.setup(relay[i], GPIO.out)
+		
+		def detectChange():
+			for i in relayStateCurr:
+				if relayStateCurr[i] != relayStatePrev[i]:
+					relayStateCurr[i] = !relayStateCurr[i]
+					GPIO.output(relay[i],relayState)
+		
+		while(True):
+			# read values from API
+			# if different, toggle relay
+			# detect button presses
+			# if different, toggle relay
