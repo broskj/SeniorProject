@@ -14,6 +14,7 @@ Home automation with Raspberry Pi
 ##### Overview
 - Built using Sails; uses the Model-View-Controller architecture.  Provides an interface to interact with/modify back-end API, which is read continuously by other components of the project.
 - Will be mobile-friendly, so that a user may truly experience home automation by mimicking a remote control.
+- Additionally, these portions of the website will require two-step verification in order to access, perhaps by only being able to log in with my Google account.
 
 ##### Components:
 - One interface controls lighting; it contains buttons (colored based on the current state of its corresponding relay) to control lights.  Additionally, a button may be checked to allow timing of specific lights.  If checked, 'start' and 'end' times may be configured.  Also, a light may be set to activate on detected motion.
