@@ -14,10 +14,12 @@ Home automation with Raspberry Pi
 ##### Overview
 - Built using Sails; uses the Model-View-Controller architecture.  Provides an interface to interact with/modify back-end API, which is read continuously by other components of the project.
 - Will be mobile-friendly, so that a user may truly experience home automation by mimicking a remote control.
+
 ##### Components:
 - One interface controls lighting; it contains buttons (colored based on the current state of its corresponding relay) to control lights.  Additionally, a button may be checked to allow timing of specific lights.  If checked, 'start' and 'end' times may be configured.  Also, a light may be set to activate on detected motion.
 - A second interface allows the duration between weather pings to be set, and also contains a button to immediately fetch current weather information.  A table of weather readings is also shown with fields including time and temperature/humidity.
 - A third smaller interface shows the current state of the alarm and allows for its toggling.  A table is also shown containing times that the alarm is activated/deactivated, and possibly when the magnetic switch is triggered.
+
 ##### Web API:
 - Relay 'objects' containing current state, auto on/off times, and whether they're controlled via motion:
     - The state variables correspond with python code running on a Raspberry Pi Zero and determine GPIO output to a corresponding Relay.
