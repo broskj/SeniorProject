@@ -1,0 +1,101 @@
+body {
+    padding-top: 55px;
+    padding-bottom: 50px;
+    background-color: #343f3e;
+    //background-color: #454545;
+    //background-image: url(/images/background3.png);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+h1,
+h2,
+h3,
+a,
+.page-header,
+.form-control,
+.checkbox,
+.btn {
+    color: whitesmoke;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.form-control {
+    color: black;
+}
+
+.list-group-item {
+    padding: 12px;
+    font-size: 22px;
+}
+
+.navStyle {
+    color: #777;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.infoStyle,
+.form-group {
+    color: #777;
+    font-size: small;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+p {
+    color: whitesmoke;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+}
+
+a:link {
+    color: whitesmoke;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: floralwhite;
+}
+
+.right-nav {
+    margin-right: 5px;
+}
+
+.landing-title {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 300%;
+}
+
+.divider {
+    width: 5px;
+    height: auto;
+    display: inline-block;
+}
+
+.page-header {
+    padding-top: 20px;
+}
+
+.img-main {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row {
+    justify-content: center;
+}
+
+.col-md-4 {
+    display: block;
+    text-align: center;
+    padding: 15px
+}
+
+.img-responsive {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
