@@ -1,0 +1,24 @@
+{
+    "name": "SeniorProject",
+    "description": "a Sails application",
+    "main": "app.js",
+    "authors": [
+    "broskj"
+  ],
+    "license": "MIT",
+    "homepage": "https://github.com/broskj/SeniorProject",
+    "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+    "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
