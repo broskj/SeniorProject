@@ -1,7 +1,20 @@
 <div id="automation-alarm" class="container">
-    <div class="page-header">
-        <h1>Alarm</h1>
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#/automation/overview">Overview</a></li>
+        <li role="presentation"><a href="#/automation/lights">Lights</a></li>
+        <li role="presentation"><a href="#/automation/weather">Weather</a</li>
+        <li role="presentation" class="active"><a href="#/automation/alarm">Alarm</a></li>
+    </ul>
+    <div ng-controller="AlarmCtrl">
+        <p ng-show="alarm[0].status" style="color:lawngreen">System is armed.</p>
+        <p ng-show="!alarm[0].status" style="color:red">System is unarmed.</p>
+        <h2>Controller</h2>
+        <button class="btn btn-danger center-block " type="button " ng-show="alarm[0].status " ng-click="toggleAlarm(alarm[0]) " style="width:50% ">Disarm system</button>
+        <button class="btn btn-success center-block " type="button " ng-show="!alarm[0].status " ng-click="toggleAlarm(alarm[0]) " style="width:50% ">Arm system</button>
+        <h2>Log</h2>
+        <ul class="list-group ">
+            <li class="list-group-item clearfix " ng-repeat="alarm in alarmLog | orderBy: '-id' | limitTo:10 ">[{{alarm.createdAt}}] {{alarm.description}}</li>
+        </ul>
+        <h2>Graph</h2>
     </div>
-    <p>alarm info
-    </p>
 </div>

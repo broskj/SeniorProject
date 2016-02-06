@@ -1,7 +1,27 @@
 <div id="automation-lights" class="container">
-    <div class="page-header">
-        <h1>Lights</h1>
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#/automation/overview">Overview</a></li>
+        <li role="presentation" class="active"><a href="#/automation/lights">Lights</a></li>
+        <li role="presentation"><a href="#/automation/weather">Weather</a</li>
+            <li role="presentation"><a href="#/automation/alarm">Alarm</a></li>
+    </ul>
+    <div ng-controller="LightsCtrl">
+        <p>Lights info here</p>
+        <h2>Controller<button class="btn btn-success" style="float:right">Toggle All</button></h2>
+        <ul class="list-group">
+            <li class="list-group-item clearfix" ng-repeat="light in lights"><b>{{light.description}}: {{light.status}}</b>
+                <div class="btn-group" role="group" style="float:right" aria-label="light-buttons">
+                    <button class="btn btn-success" ng-click="addLight(light)" type="button">btn1</button>
+                    <button class="btn btn-info" type="button">btn2</button>
+                    <button class="btn btn-danger" type="button">btn3</button>
+                </div>
+            </li>
+        </ul>
+        <h2>Log</h2>
+        <ul class="list-group">
+            <li class="list-group-item clearfix" ng-repeat="event in events"><b>{{event}}</b>
+
+            </li>
+        </ul>
+        <h2>Graph</h2>
     </div>
-    <p>lights info
-    </p>
-</div>

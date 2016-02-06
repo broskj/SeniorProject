@@ -1,7 +1,37 @@
 <div id="automation-weather" class="container">
-    <div class="page-header">
-        <h1>Weather</h1>
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#/automation/overview">Overview</a></li>
+        <li role="presentation"><a href="#/automation/lights">Lights</a></li>
+        <li role="presentation" class="active"><a href="#/automation/weather">Weather</a</li>
+        <li role="presentation"><a href="#/automation/alarm">Alarm</a></li>
+    </ul>
+    <p>Weather info here</p>
+    <div ng-controller="WeatherCtrl">
+        <h2>Controller</h2>
+        <div class="row container">
+            <div class="input-group">
+                <input type="number" class="form-control" aria-label="weather-duration">
+                <div class="input-group-btn">
+                    <button type="button" role="group" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{unit}} <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="changeUnit('s')">s</a></li>
+                        <li><a ng-click="changeUnit('m')">m</a></li>
+                        <li><a ng-click="changeUnit('h')">h</a></li>
+                    </ul>
+                    <button class="btn btn-success" type="button">Fetch Now</button>
+                </div>
+            </div>
+        </div>
+        <h2>Log</h2>
+        <ul class="list-group">
+            <li class="list-group-item clearfix" ng-repeat="entry in wlog"><b>{{entry}}</b>
+                <div class="btn-group" role="group" style="float:right" aria-label="wlog-buttons">
+                    <button class="btn btn-success" ng-click="addEntry(entry)" type="button">btn1</button>
+                    <button class="btn btn-info" type="button">btn2</button>
+                    <button class="btn btn-danger" type="button">btn3</button>
+                </div>
+            </li>
+        </ul>
+        <h2>Graph</h2>
     </div>
-    <p>weather info
-    </p>
 </div>
