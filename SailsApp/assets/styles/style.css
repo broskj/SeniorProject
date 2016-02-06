@@ -22,13 +22,25 @@ a,
     font-family: 'Ubuntu', sans-serif;
 }
 
+.nav-tabs {
+    margin-bottom: 24px;
+}
+
+.footer {
+    vertical-align: bottom;
+    text-align: center;
+    width: 100%;
+    opacity: 0.5;
+    font-size: 12px;
+}
+
 .form-control {
     color: black;
 }
 
 .list-group-item {
     padding: 12px;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .navStyle {
