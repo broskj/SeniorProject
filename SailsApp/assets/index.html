@@ -28,7 +28,7 @@
     <div class="container" ng-controller="MainCtrl">
         <!-- navbar common to all pages -->
         <nav class="navbar navbar-default navbar-fixed-top" data-toggle="collapse" data-target="navbar-collapse">
-            <div class="container">
+            <div style="margin-right:8px">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                         <span class="icon-bar"></span>
@@ -42,12 +42,9 @@
                         <li class="dropdown">
                             <a id="dropdownMenu1" class="dropdown-toggle" data-toggle="dropdown" data-target="#">HOME<span class="caret"></span></a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li>
-                                    <a class="dropdown-item" href="/#about">ABOUT</a></li>
-                                <li>
-                                    <a class="dropdown-item" href="/#work">WORK</a></li>
-                                <li>
-                                    <a class="dropdown-item" href="/#projects">PROJECTS</a></li>
+                                <li><a class="dropdown-item" href="/#about">ABOUT</a></li>
+                                <li><a class="dropdown-item" href="/#work">WORK</a></li>
+                                <li><a class="dropdown-item" href="/#projects">PROJECTS</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -92,4 +89,10 @@
         </nav>
         <div ng-view></div>
     </div>
+    <!--
+    <footer>
+        <p class="footer">Written by: Kyle Brost</p>
+        <p class="footer">Copyright &copy; 2016</p>
+    </footer>
+    -->
 </body>
