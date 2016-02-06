@@ -71,14 +71,121 @@ controller('BattleShipCtrl', ['$scope', '$log', '$http', '$cookies', '$window', 
 
 }]).
 controller('OverviewCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
+    $scope.lights = [];
+    $scope.weatherLog = [];
+    $scope.alarms = [];
+    $scope.i = 0;
+    $scope.j = 0;
+    $scope.k = 0;
 
+    $scope.addLight = function (light) {
+        $scope.lights.push(light + " (" + $scope.i + ")");
+        $scope.i++;
+    }
+    $scope.addWeather = function (weather) {
+        $scope.weatherLog.push(weather + " (" + $scope.j + ")");
+        $scope.j++;
+    }
+    $scope.addAlarm = function (alarm) {
+        $scope.alarms.push(alarm + " (" + $scope.k + ")");
+        $scope.k++;
+    }
+
+    $scope.lights.push("Light 1");
+    $scope.lights.push("Light 2");
+    $scope.lights.push("Light 3");
+    $scope.lights.push("Light 4");
+
+    $scope.weatherLog.push("Weather item 1");
+    $scope.weatherLog.push("Weather item 2");
+    $scope.weatherLog.push("Weather item 3");
+
+    $scope.alarms.push("Alarm");
 }]).
 controller('LightsCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
+    $scope.lights = {};
+    $scope.events = [];
+
+    $http({
+        method: 'GET',
+        url: '/LightsCtrl'
+    }).success(function (response) {
+        $scope.lights = response;
+    });
 
 }]).
 controller('WeatherCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
+    $scope.wlog = [];
+    $scope.events = [];
+    $scope.i = 0;
+    $scope.unit = "m";
+
+    $scope.addEntry = function (entry) {
+        $scope.wlog.push(entry + " (" + $scope.i + ")");
+        $scope.i++;
+    }
+
+    $scope.changeUnit = function (u) {
+        $scope.unit = u;
+    }
+
+    $scope.wlog.push("Weather item 1");
+    $scope.wlog.push("Weather item 2");
+    $scope.wlog.push("Weather item 3");
 
 }]).
-controller('AlarmCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
+controller('AlarmCtrl', ['$scope', '$log', '$http', '$route', '$window', function ($scope, $log, $http, $route, $window) {
+    $scope.alarm = {};
+    $scope.alarmLog = {};
+
+    $http({
+        method: 'GET',
+        url: '/AlarmCtrl'
+    }).success(function (response) {
+        $scope.alarm = response;
+    });
+
+    $http({
+        method: 'GET',
+        url: '/AlarmLog'
+    }).success(function (response) {
+        $scope.alarmLog = response;
+    });
+
+    $scope.toggleAlarm = function (curAlarm) {
+        console.log(curAlarm);
+        $scope.newStatus = !curAlarm.status;
+        console.log($scope.newStatus);
+        $http({
+            method: 'PUT',
+            url: '/AlarmCtrl/update/' + curAlarm.id,
+            params: {
+                status: $scope.newStatus
+            }
+        }).then(function successCallback(response) {
+            $scope.alarm[0] = response.data;
+            $scope.logDescription = "";
+
+            if ($scope.alarm[0].status)
+                $scope.logDescription = "System armed."
+            else
+                $scope.logDescription = "System disarmed."
+
+            $http({
+                method: 'POST',
+                url: '/AlarmLog/create',
+                params: {
+                    description: $scope.logDescription
+                }
+            }).success(function (response) {
+                $http({
+                    method: 'GET',
+                    url: '/AlarmLog'
+                }).success(function (response) {
+                    $scope.alarmLog = response;
+                });
+            });
+        });
+    }
 
 }]);
