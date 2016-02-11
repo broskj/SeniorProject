@@ -16,11 +16,11 @@ module.exports = {
             required: true
         },
         onTime: {
-            type: "datetime",
+            type: "date",
             required: false
         },
         offTime: {
-            type: "datetime",
+            type: "date",
             required: false
         },
         onMotion: {

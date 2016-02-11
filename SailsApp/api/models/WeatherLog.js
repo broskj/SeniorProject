@@ -6,9 +6,16 @@
 */
 
 module.exports = {
-
-  attributes: {
-
-  }
+    attributes: {
+        //id automatically created and incremented
+        temp: {
+            type: "float",
+            required: "true"
+        },
+        hum: {
+            type: "float",
+            required: "true"
+        }
+        //time is handled by default through createdAt() and updatedAt()
+    }
 };
-

@@ -6,9 +6,14 @@
 */
 
 module.exports = {
-
-  attributes: {
-
-  }
+    attributes: {
+        duration: {
+            type: "int",
+            required: true
+        },
+        fetch: {
+            type: "boolean",
+            required: true
+        }
+    }
 };
-

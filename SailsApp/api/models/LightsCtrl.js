@@ -6,10 +6,29 @@
  */
 
 module.exports = {
-
     attributes: {
         status: {
             type: "boolean",
+            required: true
+        },
+        timed: {
+            type: "boolean",
+            required: true
+        },
+        onTime: {
+            type: "date",
+            required: false
+        },
+        offTime: {
+            type: "date",
+            required: false
+        },
+        onMotion: {
+            type: "boolean",
+            required: true
+        },
+        description: {
+            type: "string",
             required: true
         }
     }
