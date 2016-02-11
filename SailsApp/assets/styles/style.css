@@ -16,10 +16,19 @@ h3,
 a,
 .page-header,
 .form-control,
-.checkbox,
 .btn {
     color: whitesmoke;
     font-family: 'Ubuntu', sans-serif;
+}
+
+.checkbox {
+    font-size: 12px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 0;
+}
+
+.input-time {
+    margin-bottom: 0;
 }
 
 .nav-tabs {
