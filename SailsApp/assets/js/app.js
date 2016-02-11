@@ -104,7 +104,8 @@ controller('OverviewCtrl', ['$scope', '$log', '$http', '$cookies', '$window', fu
 }]).
 controller('LightsCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
     $scope.lights = {};
-    $scope.events = [];
+    $scope.lightsLog = {};
+    $scope.events = {};
 
     $http({
         method: 'GET',
@@ -112,26 +113,196 @@ controller('LightsCtrl', ['$scope', '$log', '$http', '$cookies', '$window', func
     }).success(function (response) {
         $scope.lights = response;
     });
+    $http({
+        method: 'GET',
+        url: '/LightsLog'
+    }).success(function (response) {
+        $scope.lightsLog = response;
+    });
 
+    $scope.toggleState = function(light) {
+        $http({
+            method: 'PUT',
+            url: '/LightsCtrl/update/' + light.id,
+            params: {
+                status: !light.status
+            }
+        }).then(function successCallback(response) {
+            $scope.lights[light.id-1] = response.data;
+
+            if($scope.lightsLog.length > 28) {
+                $http({
+                    method: 'DELETE',
+                    url: '/LightsLog/destroy/' + $scope.lightsLog[0].id
+                }).success(function (response){
+                    console.log("delete successful")
+                });
+            }
+
+            var logDescription = "Light " + light.id + " was turned ";
+
+            if(response.data.status) {
+                logDescription += "on.";
+            } else {
+                logDescription += "off.";
+            }
+
+            $http({
+                method: 'POST',
+                url: '/LightsLog/create',
+                params: {
+                    description: logDescription
+                }
+            }).success(function (response) {
+                $http({
+                    method: 'GET',
+                    url: '/LightsLog'
+                }).success(function (response) {
+                    $scope.lightsLog = response;
+                });
+            });
+        });
+    } // end toggleState
+
+    $scope.toggleMotion = function(light) {
+        $http({
+            method: 'PUT',
+            url: 'LightsCtrl/update/' + light.id,
+            params: {
+                onMotion: !light.onMotion
+            }
+        }).then(function successCallback(response) {
+            //console.log("success called")
+            //console.log(response);
+            $scope.lights[light.id-1] = response.data;
+
+            if($scope.lightsLog.length > 28) {
+                $http({
+                    method: 'DELETE',
+                    url: '/LightsLog/destroy/' + $scope.lightsLog[0].id
+                }).success(function (response){
+                    console.log("delete successful")
+                });
+            }
+
+            var logDescription = "Light " + light.id + " is ";
+
+            if(response.data.onMotion) {
+                logDescription += "now detecting motion.";
+            } else {
+                logDescription += "no longer detecting motion.";
+            }
+
+            $http({
+                method: 'POST',
+                url: '/LightsLog/create',
+                params: {
+                    description: logDescription
+                }
+            }).success(function (response) {
+                $http({
+                    method: 'GET',
+                    url: '/LightsLog'
+                }).success(function (response) {
+                    $scope.lightsLog = response;
+                });
+            });
+        });
+    } // end toggleMotion
+
+    $scope.toggleTimed = function(light) {
+        //console.log(light);
+        //console.log(!light.onMotion);
+
+        $http({
+            method: 'PUT',
+            url: 'LightsCtrl/update/' + light.id,
+            params: {
+                timed: !light.timed
+            }
+        }).then(function successCallback(response) {
+            //console.log("success called")
+            //console.log(response);
+            $scope.lights[light.id-1] = response.data;
+
+            if($scope.lightsLog.length > 28) {
+                $http({
+                    method: 'DELETE',
+                    url: '/LightsLog/destroy/' + $scope.lightsLog[0].id
+                }).success(function (response){
+                    console.log("delete successful")
+                });
+            }
+
+            var logDescription = "Light " + light.id + " is ";
+
+            if(response.data.timed) {
+                logDescription += "now on a timer.";
+            } else {
+                logDescription += "no longer on a timer.";
+            }
+
+            $http({
+                method: 'POST',
+                url: '/LightsLog/create',
+                params: {
+                    description: logDescription
+                }
+            }).success(function (response) {
+                $http({
+                    method: 'GET',
+                    url: '/LightsLog'
+                }).success(function (response) {
+                    $scope.lightsLog = response;
+                });
+            });
+        });
+    } // ent toggleTimed
+
+    $scope.updateTime = function(curLight, id) {
+        console.log(curLight);
+
+        $http({
+            method: 'PUT',
+            url: 'LightsCtrl/update/' + id,
+            params: {
+                onTime: curLight.onTime,
+                offTime: curLight.offTime
+            }
+        }).then(function successCallback(response) {
+            console.log(response);
+            $scope.lights[id-1] = response.data;
+        });
+    } // end updateTime
+
+    $scope.toggleAll = function() {
+        console.log("this function doesn't work");
+    } // end toggleAll
 }]).
 controller('WeatherCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
-    $scope.wlog = [];
+    $scope.weather = {};
     $scope.events = [];
-    $scope.i = 0;
-    $scope.unit = "m";
 
-    $scope.addEntry = function (entry) {
-        $scope.wlog.push(entry + " (" + $scope.i + ")");
-        $scope.i++;
+    $http({
+        method: 'GET',
+        url: 'WeatherCtrl'
+    }).success(function (response) {
+        console.log(response);
+        $scope.weather = response;
+    });
+
+    $scope.updateDuration = function (input) {
+        $http({
+            method: 'PUT',
+            url: 'WeatherCtrl/update/0',
+            params: {
+                duration: input
+            }
+        }).then(function successCallback(response) {
+            console.log(response);
+            $scope.lights[0] = response.data;
+        });
     }
-
-    $scope.changeUnit = function (u) {
-        $scope.unit = u;
-    }
-
-    $scope.wlog.push("Weather item 1");
-    $scope.wlog.push("Weather item 2");
-    $scope.wlog.push("Weather item 3");
 
 }]).
 controller('AlarmCtrl', ['$scope', '$log', '$http', '$route', '$window', function ($scope, $log, $http, $route, $window) {
@@ -153,12 +324,12 @@ controller('AlarmCtrl', ['$scope', '$log', '$http', '$route', '$window', functio
     });
 
     $scope.toggleAlarm = function (curAlarm) {
-        console.log(curAlarm);
+        //console.log(curAlarm);
         $scope.newStatus = !curAlarm.status;
-        console.log($scope.newStatus);
+        //console.log($scope.newStatus);
         $http({
             method: 'PUT',
-            url: '/AlarmCtrl/update/' + curAlarm.id,
+            url: '/AlarmCtrl/update/0',
             params: {
                 status: $scope.newStatus
             }
@@ -170,6 +341,15 @@ controller('AlarmCtrl', ['$scope', '$log', '$http', '$route', '$window', functio
                 $scope.logDescription = "System armed."
             else
                 $scope.logDescription = "System disarmed."
+
+            if($scope.alarmLog.length > 28) {
+                $http({
+                    method: 'DELETE',
+                    url: '/AlarmLog/destroy/' + $scope.alarmLog[0].id
+                }).success(function (response){
+                    console.log("delete successful")
+                });
+            }
 
             $http({
                 method: 'POST',
