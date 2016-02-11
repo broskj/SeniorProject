@@ -7,7 +7,7 @@
     </ul>
     <div ng-controller=" OverviewCtrl ">
         <p>Overview info here</p>
-        <h2>Lights<button class="btn btn-success " style="float:right ">Toggle All</button></h2>
+        <h2>Lights<button class="btn btn-success" style="float:right"><span class="glyphicon glyphicon-off"></span> All</button></h2>
         <ul class="list-group ">
             <li class="list-group-item clearfix " ng-repeat="light in lights "><b>{{light}}</b>
                 <div class="btn-group " role="group " style="float:right " aria-label="light-buttons ">
@@ -17,8 +17,7 @@
                 </div>
             </li>
         </ul>
-        <h2>Weather
-        <b class="btn btn-info " style="float:right ">Fetch</b></h2>
+        <h2>Weather<button class="btn btn-info" style="float:right "><span class="glyphicon glyphicon-refresh"></span></button></h2>
         <ul class="list-group ">
             <li class="list-group-item clearfix " ng-repeat="weather in weatherLog "><b>{{weather}}</b>
                 <div class="btn-group " role="group " style="float:right " aria-label="light-buttons ">

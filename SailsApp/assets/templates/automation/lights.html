@@ -7,21 +7,46 @@
     </ul>
     <div ng-controller="LightsCtrl">
         <p>Lights info here</p>
-        <h2>Controller<button class="btn btn-success" style="float:right">Toggle All</button></h2>
+        <h2>Controller<button class="btn btn-success" style="float:right"><span class="glyphicon glyphicon-off"></span> All</button></h2>
         <ul class="list-group">
-            <li class="list-group-item clearfix" ng-repeat="light in lights"><b>{{light.description}}: {{light.status}}</b>
-                <div class="btn-group" role="group" style="float:right" aria-label="light-buttons">
-                    <button class="btn btn-success" ng-click="addLight(light)" type="button">btn1</button>
-                    <button class="btn btn-info" type="button">btn2</button>
-                    <button class="btn btn-danger" type="button">btn3</button>
+            <li class="list-group-item clearfix" ng-repeat="light in lights">
+                <b>{{light.description}}: <b ng-show="light.status" style="color:green">On</b><b ng-show="!light.status" style="color:red">Off</b></b>
+                <div class="btn-group btn-group-vertical" role="group" style="float:right" aria-label="light-buttons">
+                    <button class="btn btn-success" type="button" ng-click="toggleState(light)"><span class="glyphicon glyphicon-off"></button>
+                    <button class="btn btn-info" type="button" ng-click="toggleMotion(light)"><span class="glyphicon glyphicon-certificate"></button>
+                    <button class="btn btn-primary" type="button" ng-click="toggleTimed(light)"><span class="glyphicon glyphicon-hourglass"></button>
                 </div>
+                <ul>
+                    <li class="navStyle" ng-show="light.onMotion" style="color:green">Motion on</li>
+                    <li class="navStyle" ng-show="!light.onMotion" style="color:red">Motion off</li>
+                    <li class="navStyle" ng-show="light.timed" style="color:green">Timer on</li>
+                    <li class="navStyle" ng-show="light.timed">
+                        <small class="input-time"> On: <input class="form-group" type="time" name="onTime" ng-model="curLight.onTime" value="light.onTime"></small>
+                        <small class="input-time"> Off: <input class="form-group" type="time" name="offTime" ng-model="curLight.offTime"></small>
+                        <button class="btn btn-success" ng-click="updateTime(curLight, light.id)"><span class="glyphicon glyphicon-ok"></span></button>
+                    </li>
+                    <li class="navStyle" ng-show="!light.timed" style="color:red">Timer off</li>
+                </ul><!--
+                <div class="container" ng-show="!light.timed">
+                    <b style="color:red">Timer off</b>
+                </div>
+                <div class="container" ng-show="light.timed">
+                    <b style="color:green">Timer on</b>
+                    <div>
+                        <small class="form-group input-time"> On: <input class="form-group" type="time" name="onTime"></small>
+                        <small class="form-group input-time"> Off: <input class="form-group" type="time" name="offTime"></small>
+                    </div>
+                </div>
+                <div class="container" ng-show="!light.onMotion">
+                    <b style="color:red">Motion off</b>
+                </div>
+                <div class="container" ng-show="light.onMotion">
+                    <b style="color:green">Motion on</b>
+                </div>-->
             </li>
         </ul>
         <h2>Log</h2>
-        <ul class="list-group">
-            <li class="list-group-item clearfix" ng-repeat="event in events"><b>{{event}}</b>
-
-            </li>
+        <ul class="list-group ">
+            <li class="list-group-item clearfix " ng-repeat="event in lightsLog | orderBy: '-id' | limitTo:10 ">[{{event.createdAt}}] {{event.description}}</li>
         </ul>
-        <h2>Graph</h2>
     </div>
