@@ -1,13 +1,13 @@
 <div id="automation-lights" class="container">
     <ul class="nav nav-tabs">
         <li role="presentation"><a href="#/automation/overview">Overview</a></li>
+        <li role="presentation"><a href="#/automation/alarm">Alarm</a></li>
         <li role="presentation" class="active"><a href="#/automation/lights">Lights</a></li>
-        <li role="presentation"><a href="#/automation/weather">Weather</a</li>
-            <li role="presentation"><a href="#/automation/alarm">Alarm</a></li>
+        <li role="presentation"><a href="#/automation/weather">Weather</a></li>
     </ul>
     <div ng-controller="LightsCtrl">
         <p>Lights info here</p>
-        <h2>Controller<button class="btn btn-success" style="float:right"><span class="glyphicon glyphicon-off"></span> All</button></h2>
+        <h2>Controller<button class="btn btn-success" style="float:right"><span class="glyphicon glyphicon-off" ng-click="toggleAll()"></span> All</button></h2>
         <ul class="list-group">
             <li class="list-group-item clearfix" ng-repeat="light in lights">
                 <b>{{light.description}}: <b ng-show="light.status" style="color:green">On</b><b ng-show="!light.status" style="color:red">Off</b></b>
@@ -26,23 +26,7 @@
                         <button class="btn btn-success" ng-click="updateTime(curLight, light.id)"><span class="glyphicon glyphicon-ok"></span></button>
                     </li>
                     <li class="navStyle" ng-show="!light.timed" style="color:red">Timer off</li>
-                </ul><!--
-                <div class="container" ng-show="!light.timed">
-                    <b style="color:red">Timer off</b>
-                </div>
-                <div class="container" ng-show="light.timed">
-                    <b style="color:green">Timer on</b>
-                    <div>
-                        <small class="form-group input-time"> On: <input class="form-group" type="time" name="onTime"></small>
-                        <small class="form-group input-time"> Off: <input class="form-group" type="time" name="offTime"></small>
-                    </div>
-                </div>
-                <div class="container" ng-show="!light.onMotion">
-                    <b style="color:red">Motion off</b>
-                </div>
-                <div class="container" ng-show="light.onMotion">
-                    <b style="color:green">Motion on</b>
-                </div>-->
+                </ul>
             </li>
         </ul>
         <h2>Log</h2>

@@ -1,36 +1,36 @@
-<div id="automation-overview" class="container">
+<div id="automation-overview" class="container" ng-controller="OverviewCtrl">
     <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#/automation/overview">Overview</a></li>
+        <li role="presentation"><a href="#/automation/alarm">Alarm</a></li>
         <li role="presentation"><a href="#/automation/lights">Lights</a></li>
-        <li role="presentation"><a href="#/automation/weather">Weather</a</li>
-            <li role="presentation"><a href="#/automation/alarm">Alarm</a></li>
+        <li role="presentation"><a href="#/automation/weather">Weather</a></li>
     </ul>
-    <div ng-controller=" OverviewCtrl ">
         <p>Overview info here</p>
-        <h2>Lights<button class="btn btn-success" style="float:right"><span class="glyphicon glyphicon-off"></span> All</button></h2>
-        <ul class="list-group ">
-            <li class="list-group-item clearfix " ng-repeat="light in lights "><b>{{light}}</b>
-                <div class="btn-group " role="group " style="float:right " aria-label="light-buttons ">
-                    <button class="btn btn-success " ng-click="addLight(light) " type="button ">btn1</button>
-                    <button class="btn btn-info " type="button ">btn2</button>
-                    <button class="btn btn-danger " type="button ">btn3</button>
-                </div>
-            </li>
-        </ul>
-        <h2>Weather<button class="btn btn-info" style="float:right "><span class="glyphicon glyphicon-refresh"></span></button></h2>
-        <ul class="list-group ">
-            <li class="list-group-item clearfix " ng-repeat="weather in weatherLog "><b>{{weather}}</b>
-                <div class="btn-group " role="group " style="float:right " aria-label="light-buttons ">
-                    <button class="btn btn-success " ng-click="addWeather(weather) " type="button ">btn1</button>
-                    <button class="btn btn-info " type="button ">btn2</button>
-                    <button class="btn btn-danger " type="button ">btn3</button>
-                </div>
-            </li>
-        </ul>
-        <div ng-controller="AlarmCtrl">
-            <h2 ng-show="alarm[0].status">Alarm<button class="btn btn-danger" style="float:right; width:100px" ng-click="toggleAlarm(alarm[0])">Disarm</button></h2>
-            <h2 ng-show="!alarm[0].status">Alarm<button class="btn btn-success" style="float:right; width:100px" ng-click="toggleAlarm(alarm[0])">Arm</button></h2>
-            <p ng-show="alarm[0].status" style="color:lawngreen">System is armed.</p>
-            <p ng-show="!alarm[0].status" style="color:red">System is unarmed.</p>
-        </div>
+    <div ng-controller="AlarmCtrl">
+        <h2 ng-show="alarm[0].status">Alarm<button class="btn btn-danger" style="float:right; width:100px" ng-click="toggleAlarm(alarm[0])">Disarm</button></h2>
+        <h2 ng-show="!alarm[0].status">Alarm<button class="btn btn-success" style="float:right; width:100px" ng-click="toggleAlarm(alarm[0])">Arm</button></h2>
+        <p ng-show="alarm[0].status" style="color:lawngreen">System is armed.</p>
+        <p ng-show="!alarm[0].status" style="color:red">System is unarmed.</p>
     </div>
+    <div ng-controller="LightsCtrl">
+        <h2>Lights<button class="btn btn-success" style="float:right"><span class="glyphicon glyphicon-off" ng-click="toggleAll()"></span> All</button></h2>
+        <ul class="list-group">
+            <li class="list-group-item clearfix" ng-repeat="light in lights">
+                <b>{{light.description}}: <b ng-show="light.status" style="color:green">On</b><b ng-show="!light.status" style="color:red">Off</b></b>
+                <button class="btn btn-success" type="button" style="float:right" ng-click="toggleState(light)"><span class="glyphicon glyphicon-off"></button>
+            </li>
+        </ul>
+    </div>
+    <div ng-controller="WeatherCtrl">
+        <h2>Weather<button class="btn btn-info" style="float:right "><span class="glyphicon glyphicon-refresh"></span></button></h2>
+        <ul class="list-group">
+            <li class="list-group-item clearfix" ng-repeat="entry in wlog"><b>{{entry}}</b>
+                <div class="btn-group" role="group" style="float:right" aria-label="wlog-buttons">
+                    <button class="btn btn-success" ng-click="addEntry(entry)" type="button">btn1</button>
+                    <button class="btn btn-info" type="button">btn2</button>
+                    <button class="btn btn-danger" type="button">btn3</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

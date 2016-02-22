@@ -10,23 +10,23 @@ config(['$routeProvider', function ($routeProvider) {
             controller: 'HomeCtrl'
         })
         .when('/projects/SeniorProject', {
-            templateUrl: 'templates/Projects/SeniorProject.html',
+            templateUrl: 'templates/projects/SeniorProject.html',
             controller: 'SeniorProjectCtrl'
         })
         .when('/projects/TheForceMediaGroup', {
-            templateUrl: 'templates/Projects/TheForceMediaGroup.html',
+            templateUrl: 'templates/projects/TheForceMediaGroup.html',
             controller: 'TheForceMediaGroupCtrl'
         })
         .when('/projects/WatchYoWrist', {
-            templateUrl: 'templates/Projects/WatchYoWrist.html',
+            templateUrl: 'templates/projects/WatchYoWrist.html',
             controller: 'WatchYoWristCtrl'
         })
         .when('/projects/JaxComedy', {
-            templateUrl: 'templates/Projects/JaxComedy.html',
+            templateUrl: 'templates/projects/JaxComedy.html',
             controller: 'JaxComedyCtrl'
         })
         .when('/projects/BattleShip', {
-            templateUrl: 'templates/Projects/BattleShip.html',
+            templateUrl: 'templates/projects/BattleShip.html',
             controller: 'BattleShipCtrl'
         })
         .when('/automation/overview', {
@@ -50,7 +50,20 @@ config(['$routeProvider', function ($routeProvider) {
     });
 }]).
 controller('MainCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
+    $scope.loggedIn = false;
 
+    $scope.test = function() {
+        $http({
+            method: 'POST',
+            url: '/auth/login',
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:1337/auth/google_oauth2'
+            }
+        }).success(function(response){
+            $scope.loggedIn = true;
+            console.log(response);
+        });
+    }
 }]).
 controller('HomeCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
 
@@ -71,36 +84,7 @@ controller('BattleShipCtrl', ['$scope', '$log', '$http', '$cookies', '$window', 
 
 }]).
 controller('OverviewCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
-    $scope.lights = [];
-    $scope.weatherLog = [];
-    $scope.alarms = [];
-    $scope.i = 0;
-    $scope.j = 0;
-    $scope.k = 0;
-
-    $scope.addLight = function (light) {
-        $scope.lights.push(light + " (" + $scope.i + ")");
-        $scope.i++;
-    }
-    $scope.addWeather = function (weather) {
-        $scope.weatherLog.push(weather + " (" + $scope.j + ")");
-        $scope.j++;
-    }
-    $scope.addAlarm = function (alarm) {
-        $scope.alarms.push(alarm + " (" + $scope.k + ")");
-        $scope.k++;
-    }
-
-    $scope.lights.push("Light 1");
-    $scope.lights.push("Light 2");
-    $scope.lights.push("Light 3");
-    $scope.lights.push("Light 4");
-
-    $scope.weatherLog.push("Weather item 1");
-    $scope.weatherLog.push("Weather item 2");
-    $scope.weatherLog.push("Weather item 3");
-
-    $scope.alarms.push("Alarm");
+    // nothing
 }]).
 controller('LightsCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
     $scope.lights = {};
@@ -109,7 +93,10 @@ controller('LightsCtrl', ['$scope', '$log', '$http', '$cookies', '$window', func
 
     $http({
         method: 'GET',
-        url: '/LightsCtrl'
+        url: '/LightsCtrl'/*,
+        headers: {
+            'Authorization': 'Bearer ' + 123
+        }*/
     }).success(function (response) {
         $scope.lights = response;
     });
@@ -281,28 +268,41 @@ controller('LightsCtrl', ['$scope', '$log', '$http', '$cookies', '$window', func
 }]).
 controller('WeatherCtrl', ['$scope', '$log', '$http', '$cookies', '$window', function ($scope, $log, $http, $cookies, $window) {
     $scope.weather = {};
-    $scope.events = [];
+    $scope.events = {};
 
     $http({
         method: 'GET',
         url: 'WeatherCtrl'
     }).success(function (response) {
-        console.log(response);
+        //console.log(response);
         $scope.weather = response;
     });
 
     $scope.updateDuration = function (input) {
         $http({
             method: 'PUT',
-            url: 'WeatherCtrl/update/0',
+            url: 'WeatherCtrl/update/1',
             params: {
                 duration: input
             }
         }).then(function successCallback(response) {
             console.log(response);
-            $scope.lights[0] = response.data;
+            $scope.weather[0] = response.data;
         });
-    }
+    } // end updateDuration
+
+    $scope.fetchNow = function() {
+        $http({
+            method: 'PUT',
+            url: 'WeatherCtrl/update/1',
+            params: {
+                fetch: !$scope.weather[0].fetch
+            }
+        }).then(function successCallback(response) {
+            console.log(response);
+            $scope.weather[0] = response.data;
+        });
+    } // end fetchNow
 
 }]).
 controller('AlarmCtrl', ['$scope', '$log', '$http', '$route', '$window', function ($scope, $log, $http, $route, $window) {
@@ -329,7 +329,7 @@ controller('AlarmCtrl', ['$scope', '$log', '$http', '$route', '$window', functio
         //console.log($scope.newStatus);
         $http({
             method: 'PUT',
-            url: '/AlarmCtrl/update/0',
+            url: '/AlarmCtrl/update/1',
             params: {
                 status: $scope.newStatus
             }

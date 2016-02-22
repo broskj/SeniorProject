@@ -1,9 +1,9 @@
 <div id="automation-alarm" class="container">
     <ul class="nav nav-tabs">
         <li role="presentation"><a href="#/automation/overview">Overview</a></li>
-        <li role="presentation"><a href="#/automation/lights">Lights</a></li>
-        <li role="presentation"><a href="#/automation/weather">Weather</a</li>
         <li role="presentation" class="active"><a href="#/automation/alarm">Alarm</a></li>
+        <li role="presentation"><a href="#/automation/lights">Lights</a></li>
+        <li role="presentation"><a href="#/automation/weather">Weather</a></li>
     </ul>
     <div ng-controller="AlarmCtrl">
         <p ng-show="alarm[0].status" style="color:lawngreen">System is armed.</p>
@@ -13,7 +13,7 @@
         <button class="btn btn-success center-block " type="button " ng-show="!alarm[0].status " ng-click="toggleAlarm(alarm[0]) " style="width:50% ">Arm system</button>
         <h2>Log</h2>
         <ul class="list-group ">
-            <li class="list-group-item clearfix " ng-repeat="alarm in alarmLog | orderBy: '-id' | limitTo:10 ">[{{alarm.createdAt}}] {{alarm.description}}</li>
+            <li class="list-group-item clearfix " ng-repeat="alarm in alarmLog | orderBy: '-id' | limitTo:5 ">[{{alarm.createdAt}}] {{alarm.description}}</li>
         </ul>
     </div>
 </div>
