@@ -1,0 +1,32 @@
+<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="nav.isCollapsed = !nav.isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">KB</a>
+    </div>
+    <div collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}">
+            <a ng-href="{{item.link}}" ng-click="nav.isCollapsed=true">{{item.title}}</a>
+        </li>
+        <li class="dropdown" ng-repeat="item in nav.projectsDropdown" ng-class="{active: nav.isProject()}">
+            <a class="dropdown-toggle" data-toggle="dropdown" ng-href="{{item.link}}">{{item.title}}<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li ng-repeat="project in nav.projects"><a class="dropdown-item" ng-href={{project.link}} ng-click="nav.isCollapsed=true">{{project.title}}</a></li>
+            </ul>
+        </li>
+        <li class="dropdown" ng-repeat="item in nav.automationDropdown" ng-class="{active: nav.isAutomation()}">
+            <a class="dropdown-toggle" data-toggle="dropdown" ng-href="{{item.link}}">{{item.title}}<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li ng-repeat="component in nav.automation"><a class="dropdown-item" ng-href={{component.link}} ng-click="nav.isCollapsed=true">{{component.title}}</a></li>
+            </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
