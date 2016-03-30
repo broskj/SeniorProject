@@ -33,7 +33,7 @@ angular.module('fullstackApp')
         console.log(res);
         $scope.lights = res.data;
         //LightsService.reinitLights($scope.lights);
-        /*
+
         // initialize lights if not created
         if($scope.lights.length === 0) {
             LightsService.initLights();
@@ -41,7 +41,6 @@ angular.module('fullstackApp')
                 $scope.lights = res.data;
             });
         }
-        */
     });
 
     $scope.toggleStatus = function(light) {
