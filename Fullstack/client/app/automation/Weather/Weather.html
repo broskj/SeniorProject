@@ -1,0 +1,29 @@
+<div id="home" class="container">
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/automation/Overview">Overview</a></li>
+        <li role="presentation"><a href="/automation/Alarm">Alarm</a></li>
+        <li role="presentation"><a href="/automation/Lights">Lights</a></li>
+        <li role="presentation" class="active"><a href="/automation/Weather">Weather</a></li>
+    </ul>
+    <p>
+        {{message}}
+    </p>
+    <h2 class="page-header">{{headers[0]}}</h2>
+    <div class="row container">
+        <div class="input-group">
+          <input type="number" class="form-control" placeholder="minutes" ng-value="weather[0].duration" ng-model="newDuration">
+          <span class="input-group-btn">
+            <button class="btn btn-success" type="button" ng-init="submit" ng-click="updateDuration(weather[0], newDuration); submit = true;"><span class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-primary" type="button" ng-click="fetchNow(weather[0])"><span class="glyphicon glyphicon-refresh"></span></button>
+          </span>
+        </div>
+        <div class="alert alert-success alert-dismissible" role="alert" ng-show="submit" style="margin:10px">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"ng-click="submit = false"><span aria-hidden="true">&times;</span></button>
+            <strong>Duration updated!</strong>
+        </div>
+    </div>
+    <h2 class="page-header">{{headers[1]}}</h2>
+    <ul class="list-group">
+        <li class="list-group-item clearfix " ng-repeat="event in log | orderBy:'':true | limitTo:10 ">[{{event.createdAt}}] {{event.description}}</li>
+    </ul>
+</div>

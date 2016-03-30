@@ -1,0 +1,23 @@
+<div id="home" class="container">
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/automation/Overview">Overview</a></li>
+        <li role="presentation" class="active"><a href="/automation/Alarm">Alarm</a></li>
+        <li role="presentation"><a href="/automation/Lights">Lights</a></li>
+        <li role="presentation"><a href="/automation/Weather">Weather</a></li>
+    </ul>
+  <div class="row col-lg-12">
+      <p>
+          {{message}}
+      </p>
+      <h2 class="page-header">{{headers[0]}}</h2>
+        <p ng-show="alarms[0].status" style="color:lawngreen">System is armed.</p>
+        <p ng-show="!alarms[0].status" style="color:red">System is unarmed.</p>
+        <h2>Controller</h2>
+        <button class="btn btn-danger center-block " type="button " ng-show="alarms[0].status " ng-click="toggleAlarm(alarms[0]) " style="width:50% ">Disarm system</button>
+        <button class="btn btn-success center-block " type="button " ng-show="!alarms[0].status " ng-click="toggleAlarm(alarms[0]) " style="width:50% ">Arm system</button>
+      <h2 class="page-header">{{headers[1]}}</h2>
+      <ul class="list-group">
+          <li class="list-group-item clearfix" ng-repeat="event in log | orderBy:'':true | limitTo:10">[{{event.createdAt}}] {{event.description}}</li>
+      </ul>
+  </div>
+</div>

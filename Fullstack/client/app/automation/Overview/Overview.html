@@ -1,0 +1,19 @@
+<div id="home" class="container">
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="/automation/Overview">Overview</a></li>
+        <li role="presentation"><a href="/automation/Alarm">Alarm</a></li>
+        <li role="presentation"><a href="/automation/Lights">Lights</a></li>
+        <li role="presentation"><a href="/automation/Weather">Weather</a></li>
+    </ul>
+  <div class="row col-lg-12">
+      <p>
+          {{message}}
+      </p>
+    <div ng-repeat="item in items">
+      <h2 class="page-header">{{item.header}}</h2>
+      <p>
+          {{item.body}}
+      </p>
+    </div>
+  </div>
+</div>
