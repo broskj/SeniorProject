@@ -9,11 +9,43 @@
       <p>
           {{message}}
       </p>
-    <div ng-repeat="item in items">
-      <h2 class="page-header">{{item.header}}</h2>
-      <p>
-          {{item.body}}
-      </p>
-    </div>
+      <h2 class="page-header">{{headers[0]}}</h2>
+      <div ng-controller="AlarmCtrl">
+        <p ng-show="alarms[0].status" style="color:lawngreen">System is armed.</p>
+        <p ng-show="!alarms[0].status" style="color:red">System is unarmed.</p>
+        <button class="btn btn-danger center-block " type="button " ng-show="alarms[0].status " ng-click="toggleAlarm(alarms[0]) " style="width:50% ">Disarm system</button>
+        <button class="btn btn-success center-block " type="button " ng-show="!alarms[0].status " ng-click="toggleAlarm(alarms[0]) " style="width:50% ">Arm system</button>
+      </div>
+      <h2 class="page-header">{{headers[1]}}</h2>
+      <div ng-controller="LightsCtrl">
+          <ul class="list-group">
+              <li class="list-group-item clearfix" ng-repeat="light in lights">
+                  <b>{{light.description}}: <b ng-show="light.status" style="color:green">On</b><b ng-show="!light.status" style="color:red">Off</b></b>
+                  <div class="btn-group btn-group-vertical" role="group" style="float:right" aria-label="light-buttons">
+                      <button class="btn btn-success" type="button" ng-click="toggleStatus(light)"><span class="glyphicon glyphicon-off"></button>
+                      <button class="btn btn-info" type="button" ng-click="toggleMotion(light)"><span class="glyphicon glyphicon-eye-open"></button>
+                      <button class="btn btn-primary" type="button" ng-click="toggleTimed(light)"><span class="glyphicon glyphicon-time"></button>
+                  </div>
+                  <ul>
+                      <li class="navStyle" ng-show="light.onMotion" style="color:green">Motion on</li>
+                      <li class="navStyle" ng-show="!light.onMotion" style="color:red">Motion off</li>
+                      <li class="navStyle" ng-show="light.timed" style="color:green">Timer on</li>
+                      <li class="navStyle" ng-show="light.timed">
+                          <small class="input-time"> On: <input class="form-group"  type="time" name="onTime" ng-model="onTime" ng-value="light.onTime"></small>
+                          <small class="input-time"> Off: <input class="form-group" type="time" name="offTime" ng-model="offTime" ng-value="light.offTime"></small>
+                          <button class="btn btn-success" ng-click="updateTime(light, onTime, offTime)"><span class="glyphicon glyphicon-ok"></span></button>
+                      </li>
+                      <li class="navStyle" ng-show="!light.timed" style="color:red">Timer off</li>
+                  </ul>
+              </li>
+          </ul>
+      </div>
+      <h2 class="page-header">{{headers[2]}}</h2>
+      <div ng-controller="WeatherCtrl">
+        <button class="btn btn-primary" type="button" ng-click="fetchNow(weather[0])"><span class="glyphicon glyphicon-refresh"></span></button>
+        <ul class="list-group">
+            <li class="list-group-item clearfix " ng-repeat="event in log | orderBy:'':true | limitTo:5 ">[{{event.createdAt}}] {{event.description}}</li>
+        </ul>
+      </div>
   </div>
 </div>
