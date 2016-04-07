@@ -28,8 +28,8 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <li ng-if="!Auth.isLoggedIn"><a ng-href="/login"> Login</a></li>
-          <li ng-id="Auth.isLoggedIn"><a ng-href="/logout"> Welcome, {{currentUser.name}}</a></li> 
+          <li ng-hide="nav.isLoggedIn()"><a ng-href="/login"> Login</a></li>
+          <li ng-show="nav.isLoggedIn()"><a ng-href="/logout"> Welcome, {{nav.currentUser().name}}</a></li> 
       </ul>
     </div>
   </div>
