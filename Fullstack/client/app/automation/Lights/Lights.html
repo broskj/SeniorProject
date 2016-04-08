@@ -11,7 +11,7 @@
     <h2 class="page-header">{{headers[0]}}</h2>
     <ul class="list-group">
         <li class="list-group-item clearfix" ng-repeat="light in lights">
-            <b>{{light.description}}: <b ng-show="light.status" style="color:green">On</b><b ng-show="!light.status" style="color:red">Off</b></b>
+            <b>{{light.description}}: <b ng-show="light.status" style="color:green">On</b><b ng-hide="light.status" style="color:red">Off</b></b>
             <div class="btn-group btn-group-vertical" role="group" style="float:right" aria-label="light-buttons">
                 <button class="btn btn-success" type="button" ng-click="toggleStatus(light)"><span class="glyphicon glyphicon-off"></button>
                 <button class="btn btn-info" type="button" ng-click="toggleMotion(light)"><span class="glyphicon glyphicon-eye-open"></button>
@@ -19,14 +19,14 @@
             </div>
             <ul>
                 <li class="navStyle" ng-show="light.onMotion" style="color:green">Motion on</li>
-                <li class="navStyle" ng-show="!light.onMotion" style="color:red">Motion off</li>
+                <li class="navStyle" ng-hide="light.onMotion" style="color:red">Motion off</li>
                 <li class="navStyle" ng-show="light.timed" style="color:green">Timer on</li>
                 <li class="navStyle" ng-show="light.timed">
                     <small class="input-time"> On: <input class="form-group"  type="time" name="onTime" ng-model="onTime" ng-value="light.onTime"></small>
                     <small class="input-time"> Off: <input class="form-group" type="time" name="offTime" ng-model="offTime" ng-value="light.offTime"></small>
                     <button class="btn btn-success" ng-click="updateTime(light, onTime, offTime)"><span class="glyphicon glyphicon-ok"></span></button>
                 </li>
-                <li class="navStyle" ng-show="!light.timed" style="color:red">Timer off</li>
+                <li class="navStyle" ng-hide="light.timed" style="color:red">Timer off</li>
             </ul>
         </li>
     </ul>

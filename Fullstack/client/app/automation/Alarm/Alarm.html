@@ -11,10 +11,10 @@
       </p>
       <h2 class="page-header">{{headers[0]}}</h2>
         <p ng-show="alarms[0].status" style="color:lawngreen">System is armed.</p>
-        <p ng-show="!alarms[0].status" style="color:red">System is unarmed.</p>
+        <p ng-hide="alarms[0].status" style="color:red">System is unarmed.</p>
         <h2>Controller</h2>
         <button class="btn btn-danger center-block " type="button " ng-show="alarms[0].status " ng-click="toggleAlarm(alarms[0]) " style="width:50% ">Disarm system</button>
-        <button class="btn btn-success center-block " type="button " ng-show="!alarms[0].status " ng-click="toggleAlarm(alarms[0]) " style="width:50% ">Arm system</button>
+        <button class="btn btn-success center-block " type="button " ng-hide="alarms[0].status " ng-click="toggleAlarm(alarms[0]) " style="width:50% ">Arm system</button>
       <h2 class="page-header">{{headers[1]}}</h2>
       <ul class="list-group">
           <li class="list-group-item clearfix" ng-repeat="event in log | orderBy:'':true | limitTo:10">[{{event.createdAt}}] {{event.description}}</li>
