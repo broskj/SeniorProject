@@ -29,7 +29,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <li ng-hide="nav.isLoggedIn()"><a ng-href="/login"> Login</a></li>
-          <li ng-show="nav.isLoggedIn()"><a ng-href="/logout"> Welcome, {{nav.currentUser().name}}</a></li> 
+          <li ng-show="nav.isLoggedIn()"><a> Welcome, {{nav.currentUser().name}}</a></li>
+          <li ng-show="nav.isLoggedIn()"><a ng-href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+          <li ng-show="nav.isLoggedIn()"><a ng-href="/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
       </ul>
     </div>
   </div>
