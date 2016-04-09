@@ -24,6 +24,6 @@
     </div>
     <h2 class="page-header">{{headers[1]}}</h2>
     <ul class="list-group">
-        <li class="list-group-item clearfix " ng-repeat="event in log | orderBy:'':true | limitTo:10 ">[{{event.createdAt}}] {{event.description}}</li>
+        <li class="list-group-item clearfix " ng-repeat="event in log | orderBy:'':true | limitTo:10 ">{{event.description}}</li>
     </ul>
 </div>
