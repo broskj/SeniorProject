@@ -4,9 +4,9 @@
     <li class="list-group-item" ng-repeat="user in admin.users">
 	    <div class="user-info">
 	        <strong>{{user.name}}</strong><br>
-	        <span class="text-muted">{{user.email}}</span>
+	        <span class="text-muted">{{user.email}}</span><br>
 	    </div>
-        <a ng-click="admin.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
+        <a ng-click="admin.delete(user)" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
     </li>
   </ul>
 </div>
